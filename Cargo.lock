@@ -1,0 +1,64 @@
+[root]
+name = "sneak_poc"
+version = "0.0.1"
+dependencies = [
+ "component_store 0.0.1 (git+https://github.com/rschifflin/rust-component-store)",
+ "lazy_static 0.1.7 (git+https://github.com/Kimundi/lazy-static.rs)",
+ "ncurses 5.71.1 (git+https://github.com/jeaye/ncurses-rs)",
+ "pubsub 0.0.1 (git+https://github.com/rschifflin/rust-pubsub)",
+ "uuid 0.1.11 (git+https://github.com/rust-lang/uuid)",
+]
+
+[[package]]
+name = "component_store"
+version = "0.0.1"
+source = "git+https://github.com/rschifflin/rust-component-store#9143bc9a0880d6dfeaae335512253fd60d255d70"
+
+[[package]]
+name = "lazy_static"
+version = "0.1.7"
+source = "git+https://github.com/Kimundi/lazy-static.rs#b48b0c551087af9d598a0452f4e3973d98d4419b"
+
+[[package]]
+name = "libc"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "log"
+version = "0.2.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "ncurses"
+version = "5.71.1"
+source = "git+https://github.com/jeaye/ncurses-rs#89ad3e1b0879d734650d093780cc9751dea589da"
+
+[[package]]
+name = "pubsub"
+version = "0.0.1"
+source = "git+https://github.com/rschifflin/rust-pubsub#b07e4f397f298b5bfc7e977b2a18db0a64d010e1"
+
+[[package]]
+name = "rand"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "log 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "rustc-serialize"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "uuid"
+version = "0.1.11"
+source = "git+https://github.com/rust-lang/uuid#c7862508f84b114d22bb68ec01202eafc50a81b2"
+dependencies = [
+ "rand 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustc-serialize 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+

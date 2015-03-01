@@ -1,5 +1,26 @@
 [package]
 
-name = "sneak-poc"
+name = "sneak_poc"
 version = "0.0.1"
 authors = ["Mark Schifflin <rschifflin@hotmail.com>"]
+
+[dependencies.lazy_static]
+
+git = "https://github.com/Kimundi/lazy-static.rs"
+
+[dependencies.ncurses]
+
+git = "https://github.com/jeaye/ncurses-rs"
+
+[dependencies.pubsub]
+
+git = "https://github.com/rschifflin/rust-pubsub"
+
+[dependencies.component_store]
+
+git = "https://github.com/rschifflin/rust-component-store"
+
+[dependencies.uuid]
+
+git = "https://github.com/rust-lang/uuid"
+

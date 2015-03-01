@@ -6,6 +6,7 @@ dependencies = [
  "lazy_static 0.1.7 (git+https://github.com/Kimundi/lazy-static.rs)",
  "ncurses 5.71.1 (git+https://github.com/jeaye/ncurses-rs)",
  "pubsub 0.0.1 (git+https://github.com/rschifflin/rust-pubsub)",
+ "stainless 0.0.14 (git+https://github.com/reem/stainless.git)",
  "uuid 0.1.11 (git+https://github.com/rust-lang/uuid)",
 ]
 
@@ -32,7 +33,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "ncurses"
 version = "5.71.1"
-source = "git+https://github.com/jeaye/ncurses-rs#89ad3e1b0879d734650d093780cc9751dea589da"
+source = "git+https://github.com/jeaye/ncurses-rs#bcedb3d6346b82af475a62695fde9b84b3bc365f"
 
 [[package]]
 name = "pubsub"
@@ -52,6 +53,11 @@ dependencies = [
 name = "rustc-serialize"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "stainless"
+version = "0.0.14"
+source = "git+https://github.com/reem/stainless.git#4dba9e413d8fac7b7547839559a1ebc8513b707d"
 
 [[package]]
 name = "uuid"

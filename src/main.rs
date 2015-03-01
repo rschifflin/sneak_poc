@@ -1,4 +1,23 @@
+#![feature(plugin)]
+#![plugin(stainless)]
+
 extern crate ncurses;
+extern crate pubsub;
+#[macro_use]
+extern crate lazy_static;
+
+pub struct ECS;
+
+
+impl ECS {
+  fn new() -> ECS { ECS }
+}
+
+pub mod events;
+pub mod inputs;
+pub mod systems {
+  mod curses_input_system;
+}
 
 fn main() {
   init();

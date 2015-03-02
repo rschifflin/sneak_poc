@@ -7,28 +7,30 @@ extern crate pubsub;
 extern crate lazy_static;
 extern crate uuid;
 
-
-
 pub mod events;
 pub mod inputs;
 pub mod components {
   pub mod position_component;
   pub mod dimension_component;
+  pub mod rotation_component;
 }
 pub mod systems {
   mod curses_input_system;
   mod position_system;
   mod dimension_system;
+  mod rotation_system;
 }
 
 use components::position_component::PositionComponent;
 use components::dimension_component::DimensionComponent;
+use components::rotation_component::RotationComponent;
 use std::collections::HashMap;
 
 component_store!{
   components:
     Position
     Dimension
+    Rotation
 }
 
 fn main() {

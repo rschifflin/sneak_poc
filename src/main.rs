@@ -1,22 +1,30 @@
 #![feature(plugin)]
-#![plugin(stainless)]
+#![plugin(component_store, stainless)]
 
 extern crate ncurses;
 extern crate pubsub;
 #[macro_use]
 extern crate lazy_static;
+extern crate uuid;
 
-pub struct ECS;
 
-
-impl ECS {
-  fn new() -> ECS { ECS }
-}
 
 pub mod events;
 pub mod inputs;
+pub mod components {
+  pub mod position_component;
+}
 pub mod systems {
   mod curses_input_system;
+  mod position_system;
+}
+
+use components::position_component::PositionComponent;
+use std::collections::HashMap;
+
+component_store!{
+  components:
+    Position
 }
 
 fn main() {

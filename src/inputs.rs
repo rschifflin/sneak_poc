@@ -1,4 +1,4 @@
-#[derive(PartialEq, Eq, Copy, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug)]
 pub enum GameInput {
   InputADir1,
   InputADir2,

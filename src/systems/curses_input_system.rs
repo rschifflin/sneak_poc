@@ -7,8 +7,6 @@ use inputs::GameInput::*;
 use std::collections::HashMap;
 use std::char;
 
-pub struct CursesInputSystem;
-
 lazy_static! {
   static ref INPUT_MAP: HashMap<char, EventPayload> = {
     let mut input_map: HashMap<char, EventPayload> = HashMap::new();
@@ -36,6 +34,8 @@ lazy_static! {
   };
 }
 
+pub struct CursesInputSystem;
+
 impl CursesInputSystem {
   fn on_keypress(_: &mut ECS, payload: EventPayload) -> Vec<Event<EventChannel, EventPayload>> {
     let maybe_keyboard_input = match payload {
@@ -44,7 +44,7 @@ impl CursesInputSystem {
     };
 
     maybe_keyboard_input.and_then(|ch| INPUT_MAP.get(&ch))
-                        .map(|payload| vec![Event { channel: ChannelGameInput, payload: *payload }])
+                        .map(|payload| vec![Event { channel: ChannelGameInput, payload: payload.clone() }])
                         .unwrap_or(vec![])
   }
 }
@@ -91,9 +91,9 @@ mod tests {
     describe! on_input {
       before_each {
         let expected: Vec<Vec<Event<EventChannel, EventPayload>>> =
-          input_list.iter().map(|&(_, output)| vec![Event { channel: ChannelGameInput, payload: output }]).collect();
+          input_list.iter().map(|tuple| match tuple.clone() { (_, output) => vec![Event { channel: ChannelGameInput, payload: output }] }).collect();
         let actual: Vec<Vec<Event<EventChannel, EventPayload>>> =
-          input_list.iter().map(|&(input, _)| CursesInputSystem::on_keypress(&mut ecs, input)).collect();
+          input_list.iter().map(|tuple| match tuple.clone() { (input, _) => CursesInputSystem::on_keypress(&mut ecs, input) }).collect();
       }
 
       it "has the correct channel" {
@@ -103,8 +103,8 @@ mod tests {
       }
 
       it "has the correct payload" {
-        let expected_payloads: Vec<EventPayload> = expected.iter().map(|event| event[..].first().unwrap().payload).collect();
-        let actual_payloads: Vec<EventPayload> = actual.iter().map(|event| event[..].first().unwrap().payload).collect();
+        let expected_payloads: Vec<EventPayload> = expected.iter().map(|event| event[..].first().unwrap().payload.clone()).collect();
+        let actual_payloads: Vec<EventPayload> = actual.iter().map(|event| event[..].first().unwrap().payload.clone()).collect();
         assert_eq!(expected_payloads, actual_payloads);
       }
     }

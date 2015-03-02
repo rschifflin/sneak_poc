@@ -1,12 +1,16 @@
 use inputs::GameInput;
+use components::position_component::PositionComponent;
 
 #[derive(Hash, PartialEq, Eq, Copy, Debug)]
 pub enum EventChannel {
-  ChannelGameInput
+  ChannelGameInput,
+  ChannelPositionNew
 }
 
-#[derive(PartialEq, Eq, Copy, Debug)]
+#[derive(PartialEq, Clone, Debug)]
 pub enum EventPayload {
   EventKeyboardInput(char),
-  EventGameInput(GameInput)
+  EventGameInput(GameInput),
+
+  EventPositionNew(PositionComponent),
 }

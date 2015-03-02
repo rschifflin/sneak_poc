@@ -13,18 +13,22 @@ pub mod events;
 pub mod inputs;
 pub mod components {
   pub mod position_component;
+  pub mod dimension_component;
 }
 pub mod systems {
   mod curses_input_system;
   mod position_system;
+  mod dimension_system;
 }
 
 use components::position_component::PositionComponent;
+use components::dimension_component::DimensionComponent;
 use std::collections::HashMap;
 
 component_store!{
   components:
     Position
+    Dimension
 }
 
 fn main() {

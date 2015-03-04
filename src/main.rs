@@ -12,6 +12,9 @@ pub mod types;
 pub mod colors;
 pub mod events;
 pub mod inputs;
+pub mod helpers {
+  pub mod curses_helpers;
+}
 pub mod components {
   pub mod position_component;
   pub mod dimension_component;

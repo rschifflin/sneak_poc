@@ -5,7 +5,6 @@ use events::EventChannel::*;
 use events::EventPayload::*;
 use inputs::GameInput::*;
 use std::collections::HashMap;
-use std::char;
 
 lazy_static! {
   static ref INPUT_MAP: HashMap<char, EventPayload> = {

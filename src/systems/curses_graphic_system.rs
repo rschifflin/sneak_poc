@@ -1,10 +1,7 @@
 use ECS;
 use pubsub::Event;
 use events::{EventChannel, EventPayload};
-use events::EventChannel::*;
 use events::EventPayload::*;
-use std::collections::HashMap;
-use std::char;
 
 pub struct CursesGraphicSystem;
 

@@ -1,4 +1,4 @@
-#![feature(plugin)]
+#![feature(core, plugin)]
 #![plugin(component_store, stainless)]
 
 extern crate ncurses;
@@ -20,6 +20,7 @@ pub mod components {
 pub mod systems {
   mod curses_input_system;
   mod curses_graphic_system;
+  mod curses_render_system;
   mod position_system;
   mod dimension_system;
   mod rotation_system;

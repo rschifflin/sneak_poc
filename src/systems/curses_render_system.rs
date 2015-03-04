@@ -3,10 +3,6 @@ use events::EventPayload;
 use events::EventChannel::*;
 use events::EventPayload::*;
 use types::*;
-use components::position_component::PositionComponent;
-use core::num::ToPrimitive;
-
-use ncurses;
 use helpers::curses_helpers;
 
 pub struct CursesRenderSystem;

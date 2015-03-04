@@ -1,6 +1,6 @@
 use inputs::GameInput;
 use components::position_component::PositionComponent;
-use components::dimension_component::DimensionComponent;
+use components::visbox_component::VisboxComponent;
 use components::rotation_component::RotationComponent;
 use components::curses_graphic_component::CursesGraphicComponent;
 
@@ -11,7 +11,7 @@ pub enum EventChannel {
 
   ChannelGameInput,
   ChannelPosition,
-  ChannelDimension,
+  ChannelVisbox,
   ChannelRotation,
   ChannelCursesGraphic
 }
@@ -25,7 +25,7 @@ pub enum EventPayload {
   EventGameInput(GameInput),
 
   EventPositionNew(PositionComponent),
-  EventDimensionNew(DimensionComponent),
+  EventVisboxNew(VisboxComponent),
   EventRotationNew(RotationComponent),
   EventCursesGraphicNew(CursesGraphicComponent)
 }

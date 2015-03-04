@@ -12,12 +12,18 @@ pub mod types;
 pub mod colors;
 pub mod events;
 pub mod inputs;
+pub mod visibility;
+
+pub mod util {
+  pub mod rect;
+}
+
 pub mod helpers {
   pub mod curses_helpers;
 }
 pub mod components {
   pub mod position_component;
-  pub mod dimension_component;
+  pub mod visbox_component;
   pub mod rotation_component;
   pub mod curses_graphic_component;
 }
@@ -26,7 +32,7 @@ pub mod systems {
   pub mod curses_graphic_system;
   pub mod curses_render_system;
   pub mod position_system;
-  pub mod dimension_system;
+  pub mod visbox_system;
   pub mod rotation_system;
 }
 pub mod templates {
@@ -34,7 +40,7 @@ pub mod templates {
 }
 
 use components::position_component::PositionComponent;
-use components::dimension_component::DimensionComponent;
+use components::visbox_component::VisboxComponent;
 use components::rotation_component::RotationComponent;
 use components::curses_graphic_component::CursesGraphicComponent;
 
@@ -54,7 +60,7 @@ use std::collections::HashMap;
 component_store!{
   components:
     Position
-    Dimension
+    Visbox/Visboxes
     Rotation
     CursesGraphic
 }

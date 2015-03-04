@@ -38,7 +38,7 @@ mod tests {
       let graphic = CursesGraphicComponent {
         eid: "graphic".to_string(),
         graphic: 'g',
-        color: CursesColorRed
+        color: CursesColorRedWhite
       };
       super::CursesGraphicSystem::on_new_curses_graphic(&mut ecs, EventCursesGraphicNew(graphic.clone()));
     }

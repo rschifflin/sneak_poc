@@ -1,16 +1,18 @@
 use ECS;
-use pubsub::{Event};
-use events::{EventChannel, EventPayload};
+use events::EventPayload;
+use events::EventChannel::*;
 use events::EventPayload::*;
-use core::num::ToPrimitive;
+use types::*;
 use components::position_component::PositionComponent;
+use core::num::ToPrimitive;
 use ncurses;
-
-type EventVec = Vec<Event<EventChannel, EventPayload>>;
 
 pub struct CursesRenderSystem;
 
 impl CursesRenderSystem {
+  pub fn subscribe(pubsub: &mut PubsubECS) {
+    pubsub.subscribe(ChannelRender, CursesRenderSystem::on_render);
+  }
   fn on_render(ecs: &mut ECS, payload: EventPayload) -> EventVec {
     match payload {
       EventRender => {

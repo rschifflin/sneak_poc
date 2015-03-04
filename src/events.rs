@@ -4,8 +4,11 @@ use components::dimension_component::DimensionComponent;
 use components::rotation_component::RotationComponent;
 use components::curses_graphic_component::CursesGraphicComponent;
 
-#[derive(Hash, PartialEq, Eq, Copy, Debug)]
+#[derive(Hash, PartialEq, Eq, Clone, Copy, Debug)]
 pub enum EventChannel {
+  ChannelTick,
+  ChannelRender,
+
   ChannelGameInput,
   ChannelPosition,
   ChannelDimension,
@@ -15,6 +18,7 @@ pub enum EventChannel {
 
 #[derive(PartialEq, Clone, Debug)]
 pub enum EventPayload {
+  EventTick,
   EventRender,
 
   EventKeyboardInput(char),

@@ -8,6 +8,7 @@ extern crate lazy_static;
 extern crate uuid;
 extern crate core;
 
+pub mod types;
 pub mod colors;
 pub mod events;
 pub mod inputs;
@@ -18,18 +19,27 @@ pub mod components {
   pub mod curses_graphic_component;
 }
 pub mod systems {
-  mod curses_input_system;
-  mod curses_graphic_system;
-  mod curses_render_system;
-  mod position_system;
-  mod dimension_system;
-  mod rotation_system;
+  pub mod curses_input_system;
+  pub mod curses_graphic_system;
+  pub mod curses_render_system;
+  pub mod position_system;
+  pub mod dimension_system;
+  pub mod rotation_system;
 }
 
 use components::position_component::PositionComponent;
+use systems::position_system::PositionSystem;
 use components::dimension_component::DimensionComponent;
 use components::rotation_component::RotationComponent;
 use components::curses_graphic_component::CursesGraphicComponent;
+use systems::curses_graphic_system::CursesGraphicSystem;
+use systems::curses_render_system::CursesRenderSystem;
+
+use pubsub::{Pubsub, Event};
+use events::EventChannel::*;
+use events::EventPayload::*;
+use types::PubsubECS;
+
 use std::collections::HashMap;
 
 component_store!{
@@ -41,21 +51,23 @@ component_store!{
 }
 
 fn main() {
-  init();
-  render();
+  let mut ecs = ECS::new();
+  let mut pubsub: PubsubECS = Pubsub::new(&mut ecs);
+
+  init(&mut pubsub);
+  game_loop(&mut pubsub);
   cleanup();
 }
 
-fn init() {
+fn init(ecs: &mut PubsubECS) {
+  init_systems(ecs);
   init_ncurses();
 }
 
-fn render() {
-  render_ncurses();
-}
-
-fn cleanup() {
-  cleanup_ncurses();
+fn init_systems(pubsub: &mut PubsubECS) {
+  PositionSystem::subscribe(pubsub);
+  CursesGraphicSystem::subscribe(pubsub);
+  CursesRenderSystem::subscribe(pubsub);
 }
 
 fn init_ncurses() {
@@ -67,13 +79,37 @@ fn init_ncurses() {
   ncurses::noecho();
 }
 
-fn render_ncurses() {
-  ncurses::clear();
-  ncurses::printw("Sneak POC");
-  let _ = ncurses::getch();
+fn game_loop(pubsub: &mut PubsubECS) {
+  loop {
+    let ch = ncurses::getch();
+    if ch == ncurses::KEY_F1 { break; }
+    update(pubsub);
+    render(pubsub);
+  }
+}
+
+fn update(pubsub: &mut PubsubECS) {
+    pubsub.publish(
+      Event {
+        channel: ChannelTick,
+        payload: EventTick
+      }
+    )
+}
+
+fn render(pubsub: &mut PubsubECS) {
+  pubsub.publish(
+    Event {
+      channel: ChannelRender,
+      payload: EventRender
+    }
+  )
+}
+
+fn cleanup() {
+  cleanup_ncurses();
 }
 
 fn cleanup_ncurses() {
   ncurses::endwin();
 }
-

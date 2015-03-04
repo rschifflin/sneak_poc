@@ -1,11 +1,17 @@
 use ECS;
 use pubsub::Event;
 use events::{EventChannel, EventPayload};
+use events::EventChannel::*;
 use events::EventPayload::*;
+use types::*;
 
 pub struct CursesGraphicSystem;
 
 impl CursesGraphicSystem {
+  pub fn subscribe(pubsub: &mut PubsubECS) {
+    pubsub.subscribe(ChannelCursesGraphic, CursesGraphicSystem::on_new_curses_graphic);
+  }
+
   fn on_new_curses_graphic(ecs: &mut ECS, payload: EventPayload) -> Vec<Event<EventChannel, EventPayload>> {
     let maybe_curses_graphic = match payload {
       EventCursesGraphicNew(graphic) => Some(graphic),

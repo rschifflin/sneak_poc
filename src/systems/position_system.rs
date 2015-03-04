@@ -1,12 +1,16 @@
 use ECS;
-use pubsub::{Event};
-use events::{EventChannel, EventPayload};
+use events::EventPayload;
+use events::EventChannel::*;
 use events::EventPayload::*;
-type EventVec = Vec<Event<EventChannel, EventPayload>>;
+use types::*;
 
 pub struct PositionSystem;
 
 impl PositionSystem {
+  pub fn subscribe(pubsub: &mut PubsubECS) {
+    pubsub.subscribe(ChannelPosition, PositionSystem::on_new_position);
+  }
+
   fn on_new_position(ecs: &mut ECS, payload: EventPayload) -> EventVec {
     let maybe_new_position = match payload {
       EventPositionNew(pos) => Some(pos),

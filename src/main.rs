@@ -26,14 +26,20 @@ pub mod systems {
   pub mod dimension_system;
   pub mod rotation_system;
 }
+pub mod templates {
+  pub mod debug_string;
+}
 
 use components::position_component::PositionComponent;
-use systems::position_system::PositionSystem;
 use components::dimension_component::DimensionComponent;
 use components::rotation_component::RotationComponent;
 use components::curses_graphic_component::CursesGraphicComponent;
+
+use systems::position_system::PositionSystem;
 use systems::curses_graphic_system::CursesGraphicSystem;
 use systems::curses_render_system::CursesRenderSystem;
+
+use templates::debug_string;
 
 use pubsub::{Pubsub, Event};
 use events::EventChannel::*;
@@ -55,12 +61,13 @@ fn main() {
   let mut pubsub: PubsubECS = Pubsub::new(&mut ecs);
 
   init(&mut pubsub);
+  build_world(&mut pubsub);
   game_loop(&mut pubsub);
   cleanup();
 }
 
-fn init(ecs: &mut PubsubECS) {
-  init_systems(ecs);
+fn init(pubsub: &mut PubsubECS) {
+  init_systems(pubsub);
   init_ncurses();
 }
 
@@ -77,6 +84,10 @@ fn init_ncurses() {
   ncurses::raw();
   ncurses::keypad(ncurses::stdscr, true);
   ncurses::noecho();
+}
+
+fn build_world(pubsub: &mut PubsubECS) {
+  debug_string::create(pubsub, "Sneak POC", (2,1));
 }
 
 fn game_loop(pubsub: &mut PubsubECS) {

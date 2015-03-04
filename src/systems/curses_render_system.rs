@@ -21,9 +21,9 @@ impl CursesRenderSystem {
           ecs.positions.find_position(&graphic.eid).map(|pos| {
             let (pos_x, pos_y) = CursesRenderSystem::position_to_curses_coordinates(pos);
             ncurses::mv(pos_y, pos_x);
-            ncurses::attron(ncurses::COLOR_PAIR(1));
+            ncurses::attron(ncurses::COLOR_PAIR(graphic.color as i16));
             ncurses::printw(&graphic.graphic.to_string()[..]);
-            ncurses::attroff(ncurses::COLOR_PAIR(1));
+            ncurses::attroff(ncurses::COLOR_PAIR(graphic.color as i16));
           });
         }
       }

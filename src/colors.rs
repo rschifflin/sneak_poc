@@ -1,5 +1,5 @@
-#[derive(Clone, Debug, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, PartialEq, PartialOrd)]
 pub enum CursesColor {
-  CursesColorNormal,
-  CursesColorRed
+  CursesColorDefault = 0,
+  CursesColorRedWhite,
 }
